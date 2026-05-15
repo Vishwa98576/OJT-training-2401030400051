@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fresh Blossom - Flower Collection</title>
+
+<style>
+
+  *{
+    box-sizing:border-box
+  }
+
+  body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#fff0f5
+  }
+
+  .cart-bar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#d6336c;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.2)
+  }
+
+  .badge{
+    background:#fff;
+    color:#d6336c;
+    border-radius:50%;
+    width:26px;
+    height:26px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    margin-left:8px
+  }
+
+  .view-btn{
+    background:#fff;
+    color:#d6336c;
+    border:none;
+    padding:8px 18px;
+    border-radius:20px;
+    font-weight:700;
+    cursor:pointer
+  }
+
+  .view-btn:hover{
+    background:#5c1a32;
+    color:#fff
+  }
+
+  header{
+    text-align:center;
+    padding:40px 20px 20px
+  }
+
+  header h1{
+    font-size:2.5em;
+    color:#d6336c;
+    margin:0 0 8px
+  }
+
+  header p{
+    font-size:1.2em;
+    color:#8b2c50;
+    margin:0
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:20px;
+    padding:24px 20px;
+    max-width:1200px;
+    margin:0 auto
+  }
+
+  .card{
+    background:#ffe6f0;
+    border-radius:20px;
+    box-shadow:0 4px 8px rgba(0,0,0,.1);
+    text-align:center;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition:transform .2s
+  }
+
+  .card:hover{
+    transform:translateY(-5px)
+  }
+
+  .card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:12px
+  }
+
+  .card h3{
+    font-size:1.2em;
+    margin:10px 0 5px;
+    color:#8b2c50
+  }
+
+  .card p{
+    font-size:1em;
+    color:#5c1a32;
+    margin:0 0 14px
+  }
+
+  .atc{
+    background:#d6336c;
+    color:#fff;
+    border:none;
+    padding:10px 22px;
+    border-radius:25px;
+    font-size:.95em;
+    font-weight:600;
+    cursor:pointer;
+    width:100%;
+    margin-top:auto;
+    transition:background .2s,transform .1s
+  }
+
+  .atc:hover{
+    background:#b0255a
+  }
+
+  .atc:active{
+    transform:scale(.97)
+  }
+
+  .atc.added{
+    background:#2e7d32
+  }
+
+  .overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:200;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:60px
+  }
+
+  .overlay.open{
+    display:flex
+  }
+
+  .modal{
+    background:#fff;
+    border-radius:16px;
+    width:90%;
+    max-width:480px;
+    max-height:80vh;
+    overflow-y:auto;
+    padding:24px;
+    position:relative
+  }
+
+  .modal h2{
+    color:#d6336c;
+    margin:0 0 16px
+  }
+
+  .close{
+    position:absolute;
+    top:16px;
+    right:20px;
+    font-size:1.6em;
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:#8b2c50
+  }
+
+  .ci{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #f5d0df
+  }
+
+  .ci:last-child{
+    border-bottom:none
+  }
+
+  .ci-name{
+    font-weight:600;
+    color:#5c1a32
+  }
+
+  .ci-price{
+    font-size:.9em;
+    color:#8b2c50
+  }
+
+  .qty{
+    display:flex;
+    align-items:center;
+    gap:8px
+  }
+
+  .qb{
+    background:#d6336c;
+    color:#fff;
+    border:none;
+    border-radius:50%;
+    width:28px;
+    height:28px;
+    font-size:1.1em;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center
+  }
+
+  .qb:hover{
+    background:#b0255a
+  }
+
+  .total{
+    margin-top:16px;
+    font-size:1.1em;
+    font-weight:700;
+    color:#d6336c;
+    text-align:right
+  }
+
+  .empty{
+    text-align:center;
+    color:#8b2c50;
+    padding:20px 0
+  }
+
+  .chk{
+    text-align: center;
+    display:block;
+    width:100%;
+    margin-top:16px;
+    background:#d6336c;
+    color:#fff;
+    border:none;
+    padding:14px;
+    text-decoration: none;
+    border-radius:30px;
+    font-size:1.05em;
+    font-weight:700;
+    cursor:pointer
+  }
+
+  .chk:hover{
+    background:#b0255a
+  }
+
+  .toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(80px);
+    background:#2e7d32;
+    color:#fff;
+    padding:12px 28px;
+    border-radius:30px;
+    font-weight:600;
+    z-index:300;
+    transition:transform .3s;
+    white-space:nowrap
+  }
+
+  .toast.show{
+    transform:translateX(-50%) translateY(0)
+  }
+
+  @media(max-width:600px){
+
+    header h1{
+      font-size:1.8em
+    }
+
+    .grid{
+      grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+      gap:14px;
+      padding:16px
+    }
+
+    .card img{
+      height:140px
+    }
+  }
+
+  @media(max-width:380px){
+
+    .grid{
+      grid-template-columns:1fr 1fr
+    }
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="cart-bar">
+  <span>
+    🛒 Cart 
+    <span class="badge" id="cartCount">0</span>
+  </span>
+
+  <button class="view-btn" onclick="openCart()">
+    View Cart
+  </button>
+</div>
+
+<header>
+  <h1>Our Collection</h1>
+  <p>Choose from our freshest blossoms</p>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeCart()">
+
+  <div class="modal">
+
+    <h2>🛒 Your Cart</h2>
+
+    <button class="close" onclick="closeCart()">x</button>
+
+    <div id="cartItems"></div>
+
+    <div class="total" id="cartTotal"></div>
+
+    <a 
+      class="chk" 
+      id="chkBtn" 
+      style="display:none" 
+      href="checkout.html">
+
+      Proceed to Checkout
+
+  </a>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const P = [
+
+  {
+    name:'Roses',
+    price:1500,
+    label:'1500 rupees per bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzFekzSMofxKlUJDfHYuRBZZZ1cX0ojc7YDw&s'
+  },
+
+  {
+    name:'Food',
+    price:700,
+    label:'700 rupees per bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgRAnNwzyIppZxTpisqijFKsgt9csPsFyv-BQ&s'
+  },
+
+  {
+    name:'Sunflowers',
+    price:100,
+    label:'100 rupee each',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTorN33bpH_3RUW-1fQ6ShHPXDarqsiEgWJJg&s'
+  },
+
+  {
+    name:'Lily',
+    price:1000,
+    label:'1000 rupee bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1DnWt_rwI_-9G3eJRpB1cJXzLCW9OtdcAQ&s'
+  },
+
+  {
+    name:'Perfume',
+    price:5000,
+    label:'5000 rupee per bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvw_A8VqL4c9VpzJHxCDLn8n6_Cy5I-TUxkA&s'
+  },
+
+  {
+    name:'Teddy',
+    price:2000,
+    label:'2000 rupee bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5h3YmRz7oLJNiMjNhE5ZRbMEu45H8wr3bFQ&s'
+  },
+
+  {
+    name:'Chocolate',
+    price:1800,
+    label:'1800 rupee bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRCLDCdLDnPGzDx0nDjKj9XHAXLwPcL-9aVA&s'
+  },
+
+  {
+    name:'Customized',
+    price:0,
+    label:'As per the requirements',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh5XxMFJlYE2zYrKMiDRE2IhxKLHH5gXoiJA&s'
+  },
+
+  {
+    name:'Makeup',
+    price:10000,
+    label:'10000 rupees per bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzwB9xhFvNWvQEHq0nEUXRKxPQbJjdL5Yl8A&s'
+  },
+
+  {
+    name:'Skincare',
+    price:8000,
+    label:'8000 rupees per bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLYMsDZQwDn0_xbNNJh5yP5_tWJT93yTqzw&s'
+  },
+
+  {
+    name:'Strawberry with chocolate',
+    price:2000,
+    label:'2000 rupees per bouquet',
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5W7tFE6M5iy3DWlXEnUGnQJy8UqaZ8zqkrA&s'
+  },
+
+];
+
+document.getElementById('grid').innerHTML = P.map(p => `
+
+  <div class="card">
+
+    <img src="${p.img}" alt="${p.name}">
+
+    <h3>${p.name}</h3>
+
+    <p>${p.label}</p>
+
+    <button 
+      class="atc" 
+      onclick="add(this,'${p.name}',${p.price})">
+
+      Add to Cart
+
+    </button>
+
+  </div>
+
+`).join('');
+
+let cart = [];
+
+const $ = id => document.getElementById(id);
+
+function add(btn,name,price){
+
+  const x = cart.find(i => i.name===name);
+
+  x ? x.qty++ : cart.push({
+    name,
+    price,
+    qty:1
+  });
+
+  $('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
+
+  btn.textContent='Added';
+  btn.classList.add('added');
+
+  setTimeout(()=>{
+    btn.textContent='Add to Cart';
+    btn.classList.remove('added')
+  },1500);
+
+  const t = $('toast');
+
+  t.textContent = name + ' added!';
+  t.classList.add('show');
+
+  setTimeout(()=>{
+    t.classList.remove('show')
+  },2200);
+}
+
+function openCart(){
+
+  if(!cart.length){
+
+    $('cartItems').innerHTML =
+    '<p class="empty">Your cart is empty.</p>';
+
+    $('cartTotal').textContent='';
+
+    $('chkBtn').style.display='none';
+  }
+
+  else{
+
+    $('cartItems').innerHTML = cart.map((i,x)=>`
+
+      <div class="ci">
+
+        <div>
+
+          <div class="ci-name">${i.name}</div>
+
+          <div class="ci-price">
+
+            ${i.price ? 'Rs '+(i.price*i.qty).toLocaleString() : 'Custom'}
+
+          </div>
+
+        </div>
+
+        <div class="qty">
+
+          <button class="qb" onclick="chg(${x},-1)">-</button>
+
+          <span>${i.qty}</span>
+
+          <button class="qb" onclick="chg(${x},1)">+</button>
+
+        </div>
+
+      </div>
+
+    `).join('');
+
+    const t = cart.reduce((s,i)=>s+i.price*i.qty,0);
+
+    $('cartTotal').textContent = t
+      ? 'Total: Rs ' + t.toLocaleString()
+      : '';
+
+    $('chkBtn').style.display='block';
+  }
+
+  $('overlay').classList.add('open');
+}
+
+function closeCart(){
+  $('overlay').classList.remove('open')
+}
+
+function chg(x,d){
+
+  cart[x].qty += d;
+
+  if(cart[x].qty<=0)
+    cart.splice(x,1);
+
+  $('cartCount').textContent =
+    cart.reduce((s,i)=>s+i.qty,0);
+
+  openCart();
+}
+
+function checkout(){
+
+  alert(
+    'Thank you! Total: Rs ' +
+    cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString() +
+    '\nWe will contact you shortly.'
+  );
+
+  cart=[];
+
+  $('cartCount').textContent=0;
+
+  closeCart();
+}
+
+</script>
+
+</body>
+</html>
