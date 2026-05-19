@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Us - Flower Shop</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#fff5f8;
+    color:#333;
+}
+
+header{
+    background:#ffb6c1;
+    padding:20px;
+    text-align:center;
+    color:white;
+}
+
+header h1{
+    margin:0;
+    font-size:40px;
+}
+
+.about{
+    width:80%;
+    margin:auto;
+    padding:40px 0;
+    text-align:center;
+}
+
+.about img{
+    width:300px;
+    border-radius:15px;
+}
+
+.about h2{
+    color:#ff4d79;
+    margin-top:20px;
+}
+
+.about p{
+    font-size:18px;
+    line-height:1.7;
+}
+
+.icons{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin-top:40px;
+}
+
+.box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:180px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.box svg{
+    width:40px;
+    height:40px;
+    color:#ff4d79;
+}
+
+footer{
+    background:#ffb6c1;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Florium Flower Shop</h1>
+</header>
+
+<section class="about">
+
+<img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAlAMBIgACEQEDEQH/xAAcAAAABwEBAAAAAAAAAAAAAAAAAQIDBAUGBwj/xAA6EAACAQMDAQcBBgUDBAMAAAABAgMABBEFEiExBhMiQVFhcYEUIzJCUqEHFUORsTPB0WJy4fAkNIL/xAAaAQACAwEBAAAAAAAAAAAAAAAAAQIDBAUG/8QAIBEAAgIDAAMBAQEAAAAAAAAAAAECEQMSIQQxQRMUBf/aAAwDAQACEQMRAD8Ax1w/pUN25o5JM0yTVtmZIVmi3UVDFRZYkOIcmpAXio8Q5qYg4qLLEMlM0gxcdKmBMmjkQbaQytZaQRUh1600w4piGGptjS5OKazzQAuPrVhadRVenWp9p1FVz9FuP2aGwPSr+yP4az9j5VfWhwBXMzHXxPhbq3FDdUbfxQ31losokbvehTG+hSoVHKWeiBzSKUtejs8+ojopWKQOlGGosKHYxipKUjT4luLuCB3EaySKpfHTJxmt7qfYCfSru1ubV2vrETJ367cOi7hkkDqMZoaHaRiUbkbeTnFabtT2PvNC0yG/eVZoTgTFV/0iemfUeXzWt7edkLa6tW1nS4VjngG6eKMcSIOpAH5gAfnFam9t4NU024sJzuguYShI8gRwR8cGhIi5GBtv4Zx3ukWUwvJYbt0V5dwDLgjIAHljisFPol/Hr/8AJVizeGXu1Hkc/m+Mc13+CRo7OEOMMEUEehx0qhfTIz/EI6jtBKacCCR+cuRn+wNOiOxzbtr2Gl0OfTodOkmvmu8x7doz3i4zjHlz+1SdP/hrc/yC8vdVkkt71VYw2y4O3b+rrnPoK69IkRuIWKAyxqdrHqu7Gf8AFOSHu4y/5jwB70xbM866l2f1TR7a1uNTtTbrdZ2KzAsMc+IeR5HHX1xTdqOldb/ijbW0vZCWZx99byo0cmedzMAw+oJrlmk2N3fS93Y2s1wwGSsSFiPn0qjIjRhly2Wtl0FXVs2AKpoVeGRopkaORDhlYYINWsLgAVzsqOvhaonb6LvKj76MtVFF1knfQqNvoUqJUc4xQBpbCm2runBF7uKT3qqcM4BPTNNMa6//AAx0Z7bs+bq7isp4b7bIiY3sFxjDAjH0GaaRVOVFL/DLTtH1ZL+31O3WaddrR+IgqvqD811u3XubeNA7OI1C7mPJ+ayV92OigvY9Y7LJHZ6jFk/ZicQzg8FD+nI8x54q/wBI1FNRtywR4ZkOyaCTh42H5WHr79CMEUyst4WDAjHBqEEFtIkafgAwvsPKjRjHLg0dw25Q46qaAYm44DAeXNE0OL4zfrhjT+zOf96VMM4PqtOSnaYT6Jmj6Rrg1CN91K5/L/tSLljJIEHQGnV+4tB+p+cUwSY4nmwHYnCKfM0AZbtbZSdo9StOz9uzR20BFzfTj8owQij1Y8nHlwfnU6Zp9tpdktpYQrDCowFXqfc+ppWlWC2cDEnfJI5klkb8UjnqT/gDyAA6CpEkgG7xAADJJOAB7miiTfw53280IWU/82SRR38gEsRYk7zk5FZuOfgeVaLX21HtjqMcejwn+WW5IS4lbYkrebj1HkMA/vVDr2j3OgvDHdzQSNKpIELE4x65ANYs+Nt2dDx8yilFvopZ+KcEuaqFm96dW4rK4G2OQtN9Cq37QPWhUdGT/QyTU0xp5qZcV1kzlThRadlNOj1btBaWdxFNJC7feCHqBjr7DOOfeu7aNpNnotqLayt5oYFYkKZC4XPXGea5h/C/RL17j+cxXkEEGGhKMCzOOM9OnlXTQ9zGeXLe4OQasXoxyfS3QqRlDke1MXNoJZhd27CK7Ubd5HEi/pb29D5Z9Mioi3POWBVvValxz8Akhv8AqHl8+lILHB/8iI+ErMnVT1BpJY4VseGTwn2NSFZXw+QpUZ3eo/4rNdoe0S2qSLDtUngg9c+o9sVl8jyY4V32acHjyzvnoubq8trdFMsyjZ4WGeRTNxrFkCAJdxWLooyeuK5xearcXThJplVW+9KsMORjjn+1Vf2l1cdyZUebxQRMwxjHLZPzXP8A7Mzd1R0P48K4zrtxqEM06pDKjHgKoPl61KQI7LIx+7jG1R6nzrjdnqs8U4kh72SIll8Plj46/Sttoet/zGGJO8VUVcDDZLY4P+DWrD5bctZoy5/EjGO2N2bIv3mSCFUefkKrL/bfKYNga1H4948L/I8x7Hj9qeDtLCipGWGPDGDgf/o0y+hyXxDapN3kXlap4YvqOr/Xj2roHPKa71xstbaBZy6ndL4d6cQxn3kOBx6A1mr3sd2l1SWS81G5szOw4XvWOPQDC4A+K6YsNrbIqZjRF6KuBj6VGuLiPbtiOD5tzScU/ZKOTX0cKlLwzSRP+ONirY9QcGh33vTvaSzOma3dWvG1W3Lh9xweeSec/NVofNZpQN0MnCcJj60dQt/vQqOpP9CKRTfdtK6xxKWdyFVR1YnoKDPSEmaKZJY2KujBlYeRByDWhIryZE1w6N2S7IdrdKkF1DPaWqyAb7a4csH/AO4DofcGuiWsd2YwbqERvjnu33r9OAapuw+ttq2iRXt4HilGVcmMhJCD1T1H++a0yX8GfCpY/FWmB9fSP3XqM/IoCJM5R2japovI2/oMfrSWlRh/9dh9RSYUVesPNb6e5GDzyyNjHvXOLm4muJGdPvQVO5zwM/8AprZ9spCFVo1IAjJVSoILfNc+Y4Ks6KOAogztMjN8e9efzvfM2/h6HBHTDGvpEupSEnLHvVWFJXHc4XIPAY+lMSXDOZreMSs9xuEpij3plRkLH6DB5pF67So6TSEBojAJZWIWN152gD8Xl1qrju85neARTBZWI77u1JwBhVHQ/wCa1QxqiieTvCya6PjngMe9NjtJbnCxAjBAU9TU/s9fpbDvBJcsxbwN4UyN3iyOvn7VVX6CJ2SZx90sUaCTBljUDJZQvBFI0xZJL+ABe9dyzL3rYDg9G/t5U5QWtiUmpUjtui67FMscVupDlcnC5wfnpVq7SOAZJMf9zVjuyQeSMR90A68Nuk5Na9YyEB7uujhk5QTORnjrkkkNusHVnLH0Uf71Taw2tyRNFocVpbE8d9O5Zx8DGB8nNXbDr4SKqtVbVEgY6VFayyY4WaRl59sCrSq6ORdodH1TSrrfqy5eclhMH3iQ+ZzVUGq17U3us3GoiPXRJHNGPBEVwqj1Hr81TBqpZtg+Du+hTeaFKiVkctSCaOhg/HvVxUb/ALMduLgwWumy6VPePDEsUYtACdqgAeE8DpW9s9RuXjDSaa9mccC6mRT/AGQsf2rH9i+0Okx2dppVhZTx3kgAlCR7jM+PExb08+cAVvY7dVOW2bvPH/NMofGLivZG/CpJ9EHH9zj/ABTv/wAmbj8IPvmjBWPqVC04hklXKYVP1NSEZvtZpxazE4mkLJ+RRjP1rnsxjkWVmOzKiPG0ttyeT8fFdgvFH2eRi/dW6qd8zjJ+grmWvWc0pnlttirI23vXJ4X1Pr58CuR5OFwnt8Oz4udZMej9ozFylvJMwbuo4mHdlu5P3a44l+T60zLKIyW7mKPG1pVW2JMe38JOf1edSrmRRM6zEzAcSgNtjePnAH7VBmRpJMszyKw+8YSYJ/Sp8uKsg7QTTToakf8A01TPebST3cezLsclGPpindPzcXKwoIoo3O/xE4jxxj61HMM0u3Alm3qWYkHh+OcetaHS9N7uCN47YSSL4pZU6lT6j2PnUptVRCKftmz0FtQiSONolMSjwyKoY/vWqt7ibaAskZPo2VNR9Ajt3sYu5x+Hy4xVhNauBwAw9OhroYo6xSOTmltkbQlrq5UZe23+6ENUaXU0IKn7qTHHeR8ftTM90tluaUyIi9W2k7fkDn64pEWqWN/Fzc2tzEfNZVP7g1YVdObfxBu9Xlu4I9Tht1gXc1u1udyvnr4jjn2IGKyOa0vb51XV1it9RF3bBNyxgg9yxPKnHB6D3rL5qtrprg+IXuNCkZoUqJ2GBR4oLSqdgTNB1G90fUVutMVTcsphVWTcG3Y4xkc5Ars+jDU2tl+3tE90R4+6UhEP6Rkkn5rh0Ez288c0LbZI2DK3oRW77L9ota7R6zHaXd2sdtHGZJEgjCGTGABny680RKskfp06CFIyHlbvHPkelTMAL3s5Cxr69BUW1VIIw0zDP6R1qs1LUzcnCfgU4UDoP+asoocuDes3UuoyrCikQg+CPPU+ppL2UKWgWXBCrlifT1pVnHhjn8ZGWPoKkzIZnERwAxG/49KhOKktWPHJxlsmYLVOz0NzJFG6d3KsHeNhegzhf8Z+tV992QFtAiONpiwkpzgNnofnmt1pyrqF7fXWPBLIsSD/AKQae7T2yyWuqEYyNrf2xWV+IvjNsf8AQnVyVmc03RGvrprufhrhSp2rt2kcY+KlaVpzxSGEeG7gY7N39RfNTV9oeGt+ePEHHtnrUjWLTZIl3EBuHWp4vGhArzeXPIitXNmftlmCqf1of0H1+KvrLUY50XJ5IqBJ97F9shHjC/ep+oetUV5MmmTxyqdtpO21CT/pufyE+/OD9K10jFs07NlcwxzryAfQjyrmf8QeyFr9muNVto0SeJd8uAAsijqcfqH79K2AvZWtmeCQpMgJwRndjyxXMO3PamfWJUtoriNrNVDfdoVy3mCc8jpUWicXbMpkrwMD2FFmiOaKoGlMVmhSKFAWPA0N1JORSc0UTFFqm6JqbaTqkF8sfed0TlN23cCCOv1z9Kr6FC4RfToendp9R7T340+3QWNmqmW6kRy0hQflB4xk4HHPJrW2ix8kKNsajCDyHQCuQaNrNzozXDWixlp0CMXGcYOQRWm7BdoT/Npbe/aaae8ffG/BAZUY4PoMDjFTTKJwfw6bCO6jbdy5OWPq3p9Kjanc/ZNOmmzlmXYvyf8AxQabLxxKd3h3E+pNUd3fjWJ+4tWBhhnMZYdGYAbj/c4+lSoqb5w0HZmDu7a0Q/ncuf8A361K1JO9h1Bf1K/7Chp691ewQj+nFz80rcHkuAeh3g0UHyim7Mzju1Q+mMVqABPbFH/MMH5rDaRJ3KJIfTP/ADWvtJwcjPXkfNDRGL+MrrOU291JAx8SHOD5g1D1mygm7+wuFDWl7GcA+X/kHBHwKrv4hahJot5puq2uGIkaGaLOBIhG7H0I4NZztf2yttT06yOkz3MF5FKWddpUqpHOT0POOlFolo74UNp2j1jRjJYrcCQRM0Y7xc7cHHB61ROxdmZuWYkk+5o3dpHZ5GLuxJZm6k0g1WaEkgjRUZojQSCoqVRUAPSDBpunpqYNImA0VChQJgpSMyMGRmVh0ZTgiioUCL6PtZqUOlfYYXCNt2G4yS5X09jz1p/sv2mj0WzuI5bdpnDGSADAG4gcN7ZANZqhTsjqjqHZ/tjDbdnptTvLhH1BEZe7J8TyZJXA9OfoPireHtBbjs9c6q0q4MG4c/1CPw49c1xfA645pe99mzc2zOdueM+tSUit4kza6R2stYdFRbwsbqLCbQOZAcAkfTmpmt9tTaPp50eeObYp78dVYeQ9jx9K56KVRsw/KNlz2l7R3naC67y4xHAp+7gXonGM58zVNn2oUVRLEqDojQoUDCoGhRUCBQoUKAHZKZNChSJgFHQoUCBQoUKABQoUKABQoUKYgxRihQoAFChQoAKhQoUAFQoUKACoUKFAH//Z" alt="Flower Shop">
+
+<h2>About Us</h2>
+
+<p>
+Welcome to Florium Flower Shop. We create beautiful bouquets
+for birthdays, weddings, anniversaries, and every special moment.
+Our mission is to spread happiness with fresh and colorful flowers.
+</p>
+
+<div class="icons">
+
+<div class="box">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+</svg>
+
+<h3>Our Shop</h3>
+<p>Fresh flowers every day.</p>
+
+</div>
+
+<div class="box">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M8 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>
+<path d="M8 12c-2.33 0-7 1.17-7 3.5V16h14v-.5C15 13.17 10.33 12 8 12z"/>
+</svg>
+
+<h3>Our Team</h3>
+<p>Creative bouquet designers.</p>
+
+</div>
+
+<div class="box">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-.5a.5.5 0 0 0-.5.5v.217l6.5 3.25 6.5-3.25V4a.5.5 0 0 0-.5-.5H2zm13 2.383-4.708 2.354L15 11.117V5.883zm-.034 6.734-5.556-3.703L8 9.583l-1.41-.67-5.556 3.704A.5.5 0 0 0 2 13h12a.5.5 0 0 0 .966-.383zM1 11.117l4.708-2.88L1 5.883v5.234z"/>
+</svg>
+
+<h3>Contact</h3>
+<p>Always ready to help you.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Florium Flower Shop</p>
+</footer>
+
+</body>
+</html>
