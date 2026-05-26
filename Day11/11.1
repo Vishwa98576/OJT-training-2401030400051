@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Hide Toggle</title>
+</head>
+
+<body>
+
+    <p id="first">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, itaque.
+        Voluptatem, nobis, perferendis quaerat sit in, earum nihil maxime sed nam
+        quo necessitatibus sunt atque omnis soluta dignissimos error ratione.
+    </p>
+
+    <p id="second">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor veritatis
+        voluptatibus quibusdam saepe rem et molestiae nobis nihil dignissimos totam
+        quidem cum omnis, perferendis minima quas culpa alias obcaecati quo.
+    </p>
+
+    <button id="btn">Alert</button>
+    <button id="hide">Hide</button>
+    <button id="toggle">Toggle</button>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        $("#btn").click(function () {
+            alert("hello");
+        });
+
+        $("#hide").click(function () {
+            $("#first").hide();
+        });
+
+        $("#toggle").click(function () {
+            $("#first").toggle();
+        });
+
+    </script>
+
+</body>
+</html>
