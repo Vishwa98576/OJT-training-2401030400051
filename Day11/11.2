@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zebra Strip Table</title>
+</head>
+
+<body>
+
+    <table id="myTable" border="1" cellpadding="10" cellspacing="0">
+        
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>City</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>Palak</td>
+            <td>Ahmedabad</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>Sanchi</td>
+            <td>Surat</td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>Krisha</td>
+            <td>Rajkot</td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>Jenisha</td>
+            <td>Baroda</td>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <button id="btn">Apply Zebra Effect</button>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+
+    <script>
+        $("#btn").click(function(){
+
+            $("#myTable tr:odd").css("background-color","pink");
+
+            $("#myTable tr:even").css("background-color","yellow");
+
+        });
+    </script>
+
+</body>
+</html>
