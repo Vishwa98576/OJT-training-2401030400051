@@ -1,0 +1,128 @@
+// ============================================================
+//  Navbar.jsx  —  Slumber Sleep Diary
+//  Fixed top navigation: brand, links, theme toggle,
+//  hamburger menu, scroll-spy active link.
+// ============================================================
+
+import { useState, useEffect } from "react";
+
+const NAV_LINKS = [
+  { label: "Home",      href: "#home" },
+  { label: "Diary",     href: "#diary" },
+  { label: "Tracker",   href: "#tracker" },
+  { label: "Analytics", href: "#analytics" },
+];
+
+export default function Navbar() {
+  const [theme, setTheme]         = useState(
+    () => localStorage.getItem("slumber_theme") || "dark"
+  );
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const [activeLink, setActiveLink] = useState("#home");
+  const [scrolled, setScrolled]   = useState(false);
+
+  // ── Apply theme to <html> data-theme attribute ────────────
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("slumber_theme", theme);
+  }, [theme]);
+
+  // ── Scroll spy: highlight active section in navbar ────────
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+
+      document.querySelectorAll("section[id]").forEach((sec) => {
+        const top    = sec.offsetTop - 100;
+        const bottom = top + sec.offsetHeight;
+        
+        if (window.scrollY >= top && window.scrollY < bottom) {
+          setActiveLink("#" + sec.id);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // ── Smooth scroll on nav link click ──────────────────────
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setActiveLink(href);
+    setMenuOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      window.scrollTo({ top: target.offsetTop - 68, behavior: "smooth" });
+    }
+  };
+
+  const toggleTheme = () =>
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+
+  return (
+    <nav
+      className={`navbar${scrolled ? " navbar--scrolled" : ""}`}
+      id="navbar"
+    >
+      {/* ── Brand ── */}
+      <div className="nav-brand">
+        <span className="moon-icon">🌙</span>
+        <span className="brand-text">Slumber</span>
+      </div>
+
+      {/* ── Nav Links ── */}
+      <ul
+        className={`nav-links${menuOpen ? " open" : ""}`}
+        id="navLinks"
+      >
+        {NAV_LINKS.map(({ label, href }) => (
+          <li key={href}>
+            <a
+              href={href}
+              className={`nav-link${activeLink === href ? " active" : ""}`}
+              onClick={(e) => handleNavClick(e, href)}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+
+        {/* Login button */}
+        <li>
+          <a
+            href="#login-section"
+            className="nav-link nav-login-btn"
+            onClick={(e) => handleNavClick(e, "#login-section")}
+          >
+            Login
+          </a>
+        </li>
+      </ul>
+
+      {/* ── Controls: theme toggle + hamburger ── */}
+      <div className="nav-controls">
+        <button
+          className="theme-toggle"
+          id="themeToggle"
+          onClick={toggleTheme}
+          title="Toggle Dark / Light Mode"
+          aria-label="Toggle theme"
+        >
+          <span className="theme-icon">
+            {theme === "dark" ? "☀️" : "🌙"}
+          </span>
+        </button>
+
+        <button
+          className="hamburger"
+          id="hamburger"
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="Toggle mobile menu"
+        >
+          &#9776;
+        </button>
+      </div>
+    </nav>
+  );
+}
