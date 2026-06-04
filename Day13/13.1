@@ -1,0 +1,158 @@
+// ============================================================
+//  Header.jsx  —  Slumber Sleep Diary
+//  Hero section shown below the Navbar on the Home page.
+//  Renders: animated stars canvas, floating moon, hero text,
+//           CTA buttons, and live stats from localStorage.
+// ============================================================
+
+import { useEffect, useRef, useState } from "react";
+
+export default function Header() {
+  // ── Live stats pulled from localStorage ──────────────────
+  const [totalEntries, setTotalEntries] = useState(0);
+  const [avgSleep, setAvgSleep]         = useState("0h");
+
+  useEffect(() => {
+    // Diary entries count
+    try {
+      const entries = JSON.parse(localStorage.getItem("slumber_diary")) || [];
+      setTotalEntries(entries.length);
+    } catch {
+      setTotalEntries(0);
+    }
+
+    // Average sleep from weekly data
+    try {
+      const weekly = JSON.parse(localStorage.getItem("slumber_weekly")) || [];
+      const nonZero = weekly.filter((h) => h > 0);
+      if (nonZero.length) {
+        const avg = (nonZero.reduce((a, b) => a + b, 0) / nonZero.length).toFixed(1);
+        setAvgSleep(avg + "h");
+      }
+    } catch {
+      setAvgSleep("0h");
+    }
+  }, []);
+
+  // ── Stars canvas animation ────────────────────────────────
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    let animId;
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const count = Math.floor((canvas.width * canvas.height) / 4500);
+      stars = Array.from({ length: count }, () => ({
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height,
+        r:     Math.random() * 1.8 + 0.3,
+        alpha: Math.random(),
+        speed: Math.random() * 0.01 + 0.003,
+        dir:   Math.random() > 0.5 ? 1 : -1,
+      }));
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach((s) => {
+        s.alpha += s.speed * s.dir;
+        if (s.alpha > 1 || s.alpha < 0.1) s.dir *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+      animId = requestAnimationFrame(animate);
+    };
+
+    resize();
+    animate();
+    window.addEventListener("resize", resize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  // ── Smooth scroll helper ──────────────────────────────────
+  const scrollTo = (e, href) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (el) window.scrollTo({ top: el.offsetTop - 68, behavior: "smooth" });
+  };
+
+  // ── Render ────────────────────────────────────────────────
+  return (
+    <section className="hero" id="home">
+      {/* Twinkling stars */}
+      <canvas id="starsCanvas" ref={canvasRef}></canvas>
+
+      {/* Hero Content */}
+      <div className="hero-content">
+        <p className="hero-eyebrow">Your personal sleep companion</p>
+
+        <h1 className="hero-title">
+          Sleep Better,<br />
+          <em>Live Fuller.</em>
+        </h1>
+
+        <p className="hero-subtitle">
+          Track your dreams, log your nights, and unlock the secrets of
+          restful sleep — one night at a time.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="hero-cta">
+          <a
+            href="#tracker"
+            className="btn btn-primary"
+            onClick={(e) => scrollTo(e, "#tracker")}
+          >
+            Start Tracking
+          </a>
+          <a
+            href="#diary"
+            className="btn btn-ghost"
+            onClick={(e) => scrollTo(e, "#diary")}
+          >
+            Write Diary
+          </a>
+        </div>
+
+        {/* Live Stats */}
+        <div className="hero-stats">
+          <div className="stat">
+            <span className="stat-num">{totalEntries}</span>
+            <span className="stat-label">Diary Entries</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat">
+            <span className="stat-num">{avgSleep}</span>
+            <span className="stat-label">Avg Sleep</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat">
+            <span className="stat-num">7</span>
+            <span className="stat-label">Days Tracked</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Moon */}
+      <div className="hero-moon">
+        <div className="moon"></div>
+        <div className="moon-glow"></div>
+      </div>
+
+      {/* Scroll hint */}
+      <div className="scroll-hint">↓ Scroll to explore</div>
+    </section>
+  );
+}
