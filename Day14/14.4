@@ -1,0 +1,211 @@
+****Createcollection****
+const { MongoClient } = require("mongodb");
+
+const url = "mongodb://127.0.0.1:27017";
+const dbName = "BillingSystemDB";
+
+async function createCollection() {
+  const client = new MongoClient(url);
+
+  try {
+    await client.connect();
+
+    console.log("MongoDB Connected");
+
+    const db = client.db(dbName);
+
+    await db.createCollection("customers");
+
+    console.log("Collection 'customers' created successfully");
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await client.close();
+  }
+}
+****Insertcollection****
+const { MongoClient } = require("mongodb");
+
+const url = "mongodb://127.0.0.1:27017";
+const dbName = "BillingSystemDB";
+
+async function insertCustomers() {
+
+  const client = new MongoClient(url);
+
+  try {
+
+    await client.connect();
+
+    const db = client.db(dbName);
+
+    const customers = db.collection("customers");
+
+    const result = await customers.insertMany([
+      {
+        customerId: 101,
+        customerName: "Rahul Patel",
+        city: "Ahmedabad",
+        mobile: "9876543210",
+        email: "rahul@gmail.com"
+      },
+      {
+        customerId: 102,
+        customerName: "Priya Shah",
+        city: "Surat",
+        mobile: "9876543211",
+        email: "priya@gmail.com"
+      },
+      {
+        customerId: 103,
+        customerName: "Amit Joshi",
+        city: "Ahmedabad",
+        mobile: "9876543212",
+        email: "amit@gmail.com"
+      },
+      {
+        customerId: 104,
+        customerName: "Neha Mehta",
+        city: "Vadodara",
+        mobile: "9876543213",
+        email: "neha@gmail.com"
+      },
+      {
+        customerId: 105,
+        customerName: "Karan Desai",
+        city: "Rajkot",
+        mobile: "9876543214",
+        email: "karan@gmail.com"
+      }
+    ]);
+
+    console.log(
+      `${result.insertedCount} customer documents inserted successfully`
+    );
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await client.close();
+  }
+}
+
+insertCustomers();
+
+createCollection();
+
+****Insertorders****
+const { MongoClient } = require("mongodb");
+
+const url = "mongodb://127.0.0.1:27017";
+const dbName = "BillingSystemDB";
+
+async function insertOrders() {
+
+    const client = new MongoClient(url);
+
+    try {
+
+        await client.connect();
+
+        console.log("MongoDB Connected");
+
+        const db = client.db(dbName);
+
+        const orders = db.collection("orders");
+
+        const result = await orders.insertMany([
+            {
+                orderId: 1001,
+                customerId: 101,
+                orderDate: new Date("2026-06-01"),
+                productName: "Laptop",
+                quantity: 1,
+                amount: 55000,
+                status: "Delivered"
+            },
+            {
+                orderId: 1002,
+                customerId: 102,
+                orderDate: new Date("2026-06-02"),
+                productName: "Mobile",
+                quantity: 2,
+                amount: 40000,
+                status: "Pending"
+            },
+            {
+                orderId: 1003,
+                customerId: 103,
+                orderDate: new Date("2026-06-03"),
+                productName: "Headphones",
+                quantity: 3,
+                amount: 9000,
+                status: "Delivered"
+            },
+            {
+                orderId: 1004,
+                customerId: 104,
+                orderDate: new Date("2026-06-04"),
+                productName: "Smart Watch",
+                quantity: 2,
+                amount: 12000,
+                status: "Shipped"
+            },
+            {
+                orderId: 1005,
+                customerId: 105,
+                orderDate: new Date("2026-06-05"),
+                productName: "Keyboard",
+                quantity: 5,
+                amount: 5000,
+                status: "Pending"
+            }
+        ]);
+
+        console.log(
+            `${result.insertedCount} order documents inserted successfully`
+        );
+
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await client.close();
+    }
+}
+
+insertOrders();
+
+****Vieworders****
+const { MongoClient } = require("mongodb");
+
+const url = "mongodb://127.0.0.1:27017";
+const dbName = "BillingSystemDB";
+
+async function viewOrders() {
+
+    const client = new MongoClient(url);
+
+    try {
+
+        await client.connect();
+
+        const db = client.db(dbName);
+
+        const orders = await db
+            .collection("orders")
+            .find({})
+            .toArray();
+
+        console.table(orders);
+
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await client.close();
+    }
+}
+
+viewOrders();
+
+
